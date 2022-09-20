@@ -7,5 +7,11 @@ jobs:
   deploy:
     runs-on: build-release
     steps:
-      - name: Run a one-line script
-        run: Invoke-WebRequest -Uri https://prod-05.norwayeast.logic.azure.com:443/workflows/712eafd9c2674927a8568bce47f6fc0f/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ZrTSvWV3ugiAAylS2CNol16YeSO9yRA5wl6dDvt4qLU -Method POST
+    
+    - name: Trigger logic app view web request
+      uses: fjogeleit/http-request-action@v1
+      with:
+        url: 'https://prod-05.norwayeast.logic.azure.com:443/workflows/712eafd9c2674927a8568bce47f6fc0f/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ZrTSvWV3ugiAAylS2CNol16YeSO9yRA5wl6dDvt4qLU'
+        method: 'POST'
+        customHeaders: '{"Content-Type": "application/json"}'
+#        data: '{"key_1": "value_1", "key_2": "value_2"}'
